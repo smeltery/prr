@@ -69,10 +69,6 @@ textarea:focus-visible,
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-::selection {
-  color: var(--ink);
-  background: #654816;
-}
 h1,
 h2,
 h3,
@@ -106,12 +102,6 @@ p {
 img,
 svg {
   vertical-align: middle;
-}
-svg.icon {
-  display: inline-block;
-  width: 19px;
-  height: 19px;
-  flex-shrink: 0;
 }
 button[hidden],
 [hidden] {
@@ -171,8 +161,6 @@ button[hidden],
   align-items: center;
   justify-content: center;
   gap: 24px;
-  background: var(--ink);
-  color: var(--white);
   min-height: 48px;
   padding: 12px 22px;
   font-size: 13px;
@@ -183,28 +171,15 @@ button[hidden],
     transform 0.18s;
 }
 .button:hover {
-  background: var(--accent);
-  color: white;
   text-decoration: none;
   transform: translateY(-1px);
 }
 .text-link {
-  font-size: 13px;
   display: inline-flex;
   gap: 16px;
   align-items: center;
-  text-decoration: underline;
   text-decoration-color: #aab7ac;
-  text-underline-offset: 5px;
   text-decoration-thickness: 1px;
-}
-.icon-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-}
-.small {
-  font-size: 12px;
 }
 .site-header {
   position: sticky;
@@ -266,15 +241,9 @@ button[hidden],
   gap: 10px;
   align-items: center;
   border: 1px solid var(--ink);
-  background: var(--ink);
-  color: white;
   border-radius: 999px;
   padding: 9px 14px;
   font-size: 12px;
-}
-.github-link:hover {
-  background: var(--accent);
-  color: white;
 }
 .menu-toggle {
   display: none;
@@ -320,9 +289,6 @@ button[hidden],
   font-size: 11px;
   margin-bottom: 15px;
   width: fit-content;
-}
-.footer-grid nav > .icon-link {
-  display: flex;
 }
 .footer-bottom {
   border-top: 1px solid var(--line);
@@ -400,91 +366,6 @@ kbd {
 }
 .close-overlay:hover {
   background: #344055;
-}
-.overlay-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 24px 26px 18px;
-}
-.overlay-heading h2 {
-  font-size: 27px;
-  margin-top: 6px;
-}
-.search-dialog {
-  width: min(680px, calc(100% - 32px));
-  max-height: min(720px, calc(100dvh - 64px));
-  border-radius: 22px;
-  margin: max(32px, 9dvh) auto auto;
-  box-shadow: 0 25px 100px #16201940;
-}
-.search-dialog[open] {
-  display: flex;
-  flex-direction: column;
-}
-.panel-search {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  margin: 0 26px;
-  border: 1px solid #6f5d37;
-  background: var(--white);
-  border-radius: 12px;
-  padding: 0 15px;
-  flex-shrink: 0;
-}
-.panel-search:focus-within {
-  border-color: var(--accent);
-  outline: 2px solid var(--accent);
-  outline-offset: -1px;
-}
-.panel-search input {
-  width: 100%;
-  min-width: 0;
-  height: 54px;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  font-size: 15px;
-}
-.panel-search input:focus-visible {
-  outline: 0;
-}
-.panel-search button {
-  padding: 6px;
-  border-radius: 50%;
-  background: var(--paper);
-}
-.search-results-scroll {
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  min-height: 0;
-  padding: 0 15px 16px;
-}
-.search-section-title {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 5px 12px 10px;
-}
-.search-result {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 13px 12px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-}
-.search-result:hover,
-.search-result:focus-visible {
-  background: #2a352f;
-  color: var(--ink);
-}
-.search-result:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
 }
 .mobile-dialog {
   inset: 0;
@@ -629,11 +510,6 @@ kbd {
   background: #20282380;
   font-size: 12px;
 }
-.mobile-tasks small {
-  margin-left: auto;
-  font-size: 10px;
-  color: var(--muted);
-}
 .mobile-starter {
   padding: 22px;
   border-radius: 16px;
@@ -696,26 +572,6 @@ kbd {
   }
   .menu-toggle {
     margin-left: 0;
-  }
-  .search-dialog {
-    margin: 12px auto;
-    max-height: calc(100dvh - 24px);
-  }
-  .overlay-heading {
-    padding: 20px 20px 18px;
-  }
-  .overlay-heading h2 {
-    font-size: 26px;
-  }
-  .panel-search {
-    margin-inline: 20px;
-    padding-inline: 12px;
-  }
-  .panel-search input {
-    font-size: 16px;
-  }
-  .search-results-scroll {
-    padding-inline: 9px;
   }
   .mobile-footer-note {
     display: none;

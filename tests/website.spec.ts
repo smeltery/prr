@@ -64,7 +64,7 @@ test("search supports empty results, keyboard navigation and route changes", asy
   await expect(page.getByText("No matches.")).toBeVisible();
   await input.fill("configuration");
   await expect(page.locator(".search-result")).toHaveCount(1);
-  await page.keyboard.press("Tab");
+  await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/docs\/configuration$/);
   await expect(page.getByRole("dialog")).not.toBeVisible();
@@ -159,3 +159,45 @@ test("documentation actions match the provider menu on desktop and mobile", asyn
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
   }
 });
+
+for (const width of [320, 1440]) {
+  test(`search scopes, suggestions and keyboard shortcuts at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    const trigger = page.getByRole("button", { name: "Search ⌘ K documentation" });
+    await trigger.click();
+    const input = page.getByRole("searchbox");
+    await expect(input).toBeFocused();
+    await expect(page.getByText("Good places to start")).toBeVisible();
+    await expect(page.locator(".search-result")).toHaveCount(6);
+    await page.keyboard.press("ArrowUp");
+    await expect(page.locator(".search-result").last()).toBeFocused();
+    await page.keyboard.press("ArrowDown");
+    await expect(page.locator(".search-result").first()).toBeFocused();
+    await page.getByRole("button", { name: "Reference", exact: true }).click();
+    await expect(page.locator(".search-result")).toHaveCount(2);
+    await expect(page.locator(".result-kind")).toHaveText(["Reference", "Reference"]);
+    await input.fill("not-found");
+    await expect(page.getByText("No matches.", { exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Reset search" }).click();
+    await expect(input).toBeFocused();
+    await expect(page.getByRole("button", { name: "Everything" })).toHaveAttribute("aria-pressed", "true");
+    await input.fill("install");
+    await page.getByRole("button", { name: "Clear search" }).click();
+    await expect(input).toHaveValue("");
+    await expect(input).toBeFocused();
+    await input.fill("configuration");
+    await page.keyboard.press("Enter");
+    await expect(page).toHaveURL(/\/docs\/configuration$/);
+    await page.keyboard.press("ControlOrMeta+k");
+    await expect(input).toHaveValue("");
+    await expect(input).toBeFocused();
+    await expect(page.getByRole("dialog")).toHaveCSS("opacity", "1");
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).not.toBeVisible();
+    await trigger.click();
+    await page.keyboard.press("Escape");
+    await expect(trigger).toBeFocused();
+  });
+}

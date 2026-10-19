@@ -56,8 +56,6 @@ h2 em { font-family: var(--serif); font-weight: 400; color: var(--accent); }
 .icon-link { display: inline-flex; gap: 8px; align-items: center; }
 .github-link img { filter: brightness(0) invert(1); }
 .search-result small { display: block; color: var(--muted); }
-.search-results-scroll { padding-top: 22px; }
-.empty-search { padding: 20px; }
 .simple-page { max-width: 800px; padding-block: 80px; min-height: 60vh; }
 .simple-page p { margin: 24px 0; }
 .simple-page a:not(.button) { text-decoration: underline; }

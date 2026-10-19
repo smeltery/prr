@@ -2,16 +2,16 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { BookOpen, Menu, Search, X } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { MobileMenuContent } from "./MobileMenu";
 import { Brand, GitHub } from "./Brand";
 
-import { pages } from "@/lib/navigation";
+import { SearchPanel } from "./SearchPanel";
 
 export function MarketingNav() {
   const mobile = useRef<HTMLDialogElement>(null);
   const search = useRef<HTMLDialogElement>(null);
-  const [query, setQuery] = useState("");
+  const [searchSession, setSearchSession] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   function unlock() {
@@ -25,6 +25,7 @@ export function MarketingNav() {
   function openSearch() {
     document.querySelectorAll<HTMLDialogElement>("dialog[open]").forEach((dialog) => dialog.close());
     setMenuOpen(false);
+    setSearchSession((session) => session + 1);
     search.current?.showModal();
   }
   useEffect(() => {
@@ -44,7 +45,6 @@ export function MarketingNav() {
     search.current?.close();
     setMenuOpen(false);
   }, [pathname]);
-  const results = pages.filter((page) => page.join(" ").toLowerCase().includes(query.toLowerCase()));
   return (
     <>
       <header className="site-header">
@@ -109,41 +109,7 @@ export function MarketingNav() {
           if (e.target === e.currentTarget) close();
         }}
       >
-        <div className="overlay-heading">
-          <div>
-            <p className="eyebrow">prr documentation</p>
-            <h2 id="search-title">Find your next step.</h2>
-          </div>
-          <button className="close-overlay" onClick={close} aria-label="Close search">
-            <X size={18} />
-          </button>
-        </div>
-        <label className="panel-search">
-          <Search size={18} />
-          <span className="sr-only">Search documentation</span>
-          <input
-            autoFocus
-            type="search"
-            placeholder="Reviews, agents, configuration…"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </label>
-        <div className="search-results-scroll">
-          <p className="search-section-title" role="status">
-            {results.length} results
-          </p>
-          {results.map(([title, slug, description]) => (
-            <Link className="search-result" key={slug} href={`/docs/${slug}`} onClick={close}>
-              <BookOpen size={20} />
-              <span>
-                <strong>{title}</strong>
-                <small>{description}</small>
-              </span>
-            </Link>
-          ))}
-          {!results.length && <p className="empty-search">No matches. Try “agents” or “review”.</p>}
-        </div>
+        <SearchPanel key={searchSession} close={close} />
       </dialog>
     </>
   );

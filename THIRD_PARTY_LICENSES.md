@@ -6,6 +6,8 @@ Navigation, overlay and footer styling is adapted from [Smeltery Skills](https:/
 
 The brand-page structure follows [Smeltery Labs](https://smeltery-labs.vercel.app/brand/), with original prr copy, colors, and assets.
 
+Search layout and keyboard interactions are adapted from [Pyreload](https://github.com/smeltery/pyreload-cli), Copyright (c) 2026 smeltery, under the same PolyForm Shield license.
+
 ## Website dependencies and marks
 
 - DM Sans: Copyright 2014–2024 The DM Sans Project Authors; SIL Open Font License 1.1, bundled in the font package.

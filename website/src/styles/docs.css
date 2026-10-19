@@ -7,23 +7,11 @@
   padding: 36px 22px;
   border-right: 1px solid var(--line);
   position: sticky;
-  top: 76px;
-  height: calc(100dvh - 76px);
   overflow: auto;
 }
 .docs-sidebar nav {
   display: grid;
   gap: 5px;
-}
-.docs-sidebar nav > a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 10px;
-  font-size: 12px;
-  border-radius: 6px;
-  color: #bcc9bf;
 }
 .docs-sidebar a:hover {
   background: #2a352f;
@@ -44,12 +32,6 @@
 .docs-main {
   min-width: 0;
   padding: 56px clamp(24px, 4vw, 64px) 0;
-}
-.docs-main section {
-  scroll-margin-top: 106px;
-  padding-bottom: 44px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--line);
 }
 .docs-main h1 {
   font-size: clamp(40px, 5vw, 62px);
@@ -86,9 +68,6 @@
   .docs-layout {
     grid-template-columns: 220px minmax(0, 1fr);
   }
-  .docs-toc {
-    display: none;
-  }
 }
 @media (max-width: 700px) {
   .docs-layout {
@@ -101,13 +80,6 @@
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
-  .docs-sidebar nav {
-    display: flex;
-    overflow: auto;
-  }
-  .docs-sidebar nav > a {
-    white-space: nowrap;
-  }
   .docs-sidebar p,
   .docs-home {
     display: none;
@@ -119,7 +91,6 @@
 .docs-toc {
   padding: 50px 24px 32px 8px;
   position: sticky;
-  top: 76px;
   height: fit-content;
   display: grid;
   gap: 17px;
