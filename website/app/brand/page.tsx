@@ -31,12 +31,12 @@ export default function BrandPage() {
           One small mark. <em>A clearer signal.</em>
         </h2>
         <p className="lede">
-          A lowercase p, an open review loop, and a check at its center. A compact mark for taking another look. Keep
-          its original colors and proportions, with room around it.
+          Three commit nodes and two converging branches. A precise Git-inspired mark for reviewing changes before they
+          merge. Keep its original colors and proportions, with room around it.
         </p>
         <div className="marks">
           <figure className="mark-preview">
-            <Image src="/logo.svg" alt="prr lowercase p and review check mark" width={150} height={150} />
+            <Image src="/logo.svg" alt="prr Git branch and commit mark" width={150} height={150} />
             <figcaption>Original mark</figcaption>
           </figure>
           <figure className="signature-preview">

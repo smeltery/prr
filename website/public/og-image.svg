@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <title>prr — Good code deserves a second look.</title>
-  <desc>A terminal review and an annotated finding, in prr's dark slate and amber colors.</desc>
+  <desc>A terminal review and an annotated finding, in prr's charcoal and celadon colors.</desc>
   <rect width="1200" height="630" fill="#171c1a"/>
   <g font-family="Arial, Helvetica, sans-serif" fill="#f3f1e8">
-    <g transform="translate(62 48)"><rect width="40" height="40" rx="12" fill="#b8d9a2"/><path d="M11 30V16a9 9 0 1 1 9 9h-4" fill="none" stroke="#171c1a" stroke-width="3.8" stroke-linecap="round"/><path d="m17 15 3 3 5-5" fill="none" stroke="#171c1a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(62 48)"><rect width="40" height="40" rx="8" fill="#b8d9a2"/><g fill="none" stroke="#171c1a" stroke-width="2.8"><path d="M12 15v10m16-10v2a6 6 0 0 1-6 6h-4a6 6 0 0 0-6 6"/><circle cx="12" cy="11" r="4" fill="#b8d9a2"/><circle cx="12" cy="29" r="4" fill="#b8d9a2"/><circle cx="28" cy="11" r="4" fill="#b8d9a2"/></g></g>
     <text x="116" y="79" font-size="30" font-weight="600" letter-spacing="-1">smeltery<tspan fill="#aab7ac" font-weight="400"> / prr</tspan></text>
     <text x="1138" y="76" text-anchor="end" font-size="14" fill="#aab7ac">A second look. A better change.</text>
     <text x="62" y="220" font-size="62" font-weight="600" letter-spacing="-3">Good code</text>
