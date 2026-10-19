@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/dotbrains/prr/internal/agent"
-	"github.com/dotbrains/prr/internal/config"
+	"github.com/smeltery/prr/internal/agent"
+	"github.com/smeltery/prr/internal/config"
 )
 
 var allSeverities = []string{"critical", "suggestion", "nit", "praise"}
@@ -356,7 +356,6 @@ func TestParseFocusModes(t *testing.T) {
 		t.Errorf("expected nil for empty modes, got %v", got)
 	}
 }
-
 
 func TestShouldVerify(t *testing.T) {
 	// Save and restore.

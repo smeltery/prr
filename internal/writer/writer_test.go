@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dotbrains/prr/internal/agent"
+	"github.com/smeltery/prr/internal/agent"
 )
 
 func TestWrite_SingleAgent(t *testing.T) {
@@ -175,8 +175,8 @@ func TestWrite_MultiAgent(t *testing.T) {
 
 	// Check both agent directories
 	for _, tc := range []struct {
-		agent   string
-		sev     string
+		agent string
+		sev   string
 	}{
 		{"claude", "nit"},
 		{"gpt", "suggestion"},

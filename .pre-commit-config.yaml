@@ -1,0 +1,19 @@
+minimum_pre_commit_version: '4.0.0'
+default_install_hook_types: [pre-commit, pre-push]
+repos:
+  - repo: local
+    hooks:
+      - id: shared-checks
+        name: Shared CI checks (Flox)
+        entry: flox activate -- make check
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+      - id: shared-build-tests
+        name: Race tests and production builds (Flox)
+        entry: flox activate -- make test build website browser-test
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

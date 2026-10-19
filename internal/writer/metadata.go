@@ -8,19 +8,19 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dotbrains/prr/internal/agent"
+	"github.com/smeltery/prr/internal/agent"
 )
 
 // ReviewMetadata is the structured metadata stored alongside review output.
 type ReviewMetadata struct {
-	PRNumber  int                    `json:"pr_number"`
-	RepoSlug  string                 `json:"repo_slug,omitempty"`
-	HeadSHA   string                 `json:"head_sha,omitempty"`
-	AgentName string                 `json:"agent_name"`
-	Model     string                 `json:"model,omitempty"`
-	CreatedAt string                 `json:"created_at"`
-	Comments  []agent.ReviewComment  `json:"comments"`
-	Summary   string                 `json:"summary"`
+	PRNumber  int                   `json:"pr_number"`
+	RepoSlug  string                `json:"repo_slug,omitempty"`
+	HeadSHA   string                `json:"head_sha,omitempty"`
+	AgentName string                `json:"agent_name"`
+	Model     string                `json:"model,omitempty"`
+	CreatedAt string                `json:"created_at"`
+	Comments  []agent.ReviewComment `json:"comments"`
+	Summary   string                `json:"summary"`
 }
 
 // WriteMetadata writes a metadata.json file to the given directory.

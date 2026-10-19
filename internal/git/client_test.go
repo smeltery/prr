@@ -133,7 +133,7 @@ func TestGetDefaultBranch_FallbackToMaster(t *testing.T) {
 	mock := &mockExecutor{
 		errors: map[string]error{
 			"git -C /tmp/repo symbolic-ref refs/remotes/origin/HEAD": fmt.Errorf("not set"),
-			"git -C /tmp/repo rev-parse --verify main":              fmt.Errorf("not found"),
+			"git -C /tmp/repo rev-parse --verify main":               fmt.Errorf("not found"),
 		},
 		outputs: map[string]string{
 			"git -C /tmp/repo rev-parse --verify master": "abc123\n",
@@ -154,8 +154,8 @@ func TestGetDefaultBranch_NoneFound(t *testing.T) {
 	mock := &mockExecutor{
 		errors: map[string]error{
 			"git -C /tmp/repo symbolic-ref refs/remotes/origin/HEAD": fmt.Errorf("not set"),
-			"git -C /tmp/repo rev-parse --verify main":              fmt.Errorf("not found"),
-			"git -C /tmp/repo rev-parse --verify master":            fmt.Errorf("not found"),
+			"git -C /tmp/repo rev-parse --verify main":               fmt.Errorf("not found"),
+			"git -C /tmp/repo rev-parse --verify master":             fmt.Errorf("not found"),
 		},
 	}
 	client := NewClient(mock)

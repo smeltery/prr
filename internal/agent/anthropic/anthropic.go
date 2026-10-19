@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/dotbrains/prr/internal/agent"
-	"github.com/dotbrains/prr/internal/config"
+	"github.com/smeltery/prr/internal/agent"
+	"github.com/smeltery/prr/internal/config"
 )
 
 const defaultBaseURL = "https://api.anthropic.com"
@@ -162,4 +162,3 @@ func extractText(resp messagesResponse) string {
 	}
 	return ""
 }
-

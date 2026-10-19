@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/dotbrains/prr/internal/exec"
+	"github.com/smeltery/prr/internal/exec"
 )
 
 // PRMetadata contains information about a pull request.
@@ -267,9 +267,9 @@ func (c *Client) GetPRHeadSHA(ctx context.Context, prNumber int) (string, error)
 
 // ReviewPayload is the JSON body for creating a GitHub PR review.
 type ReviewPayload struct {
-	CommitID string           `json:"commit_id,omitempty"`
-	Body     string           `json:"body"`
-	Event    string           `json:"event"` // COMMENT, REQUEST_CHANGES, APPROVE
+	CommitID string              `json:"commit_id,omitempty"`
+	Body     string              `json:"body"`
+	Event    string              `json:"event"` // COMMENT, REQUEST_CHANGES, APPROVE
 	Comments []ReviewLineComment `json:"comments"`
 }
 

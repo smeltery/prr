@@ -1,245 +1,47 @@
-# prr — AI-Powered PR Code Review CLI
+<p align="center"><img src="assets/logo.svg" width="64" alt="prr logo"></p>
 
-![prr](./assets/og-image.svg)
+# prr
 
-[![CI](https://github.com/dotbrains/prr/actions/workflows/ci.yml/badge.svg)](https://github.com/dotbrains/prr/actions/workflows/ci.yml)
-[![Release](https://github.com/dotbrains/prr/actions/workflows/release.yml/badge.svg)](https://github.com/dotbrains/prr/actions/workflows/release.yml)
-[![License: PolyForm Shield 1.0.0](https://img.shields.io/badge/License-PolyForm%20Shield%201.0.0-blue.svg)](https://polyformproject.org/licenses/shield/1.0.0/)
+**A second look. A better change.** AI code reviews for GitHub pull requests and local branches, right in your terminal.
 
-![Go](https://img.shields.io/badge/-Go-00ADD8?style=flat-square&logo=go&logoColor=white)
-![Cobra](https://img.shields.io/badge/-Cobra-00ADD8?style=flat-square&logo=go&logoColor=white)
-![Anthropic](https://img.shields.io/badge/-Anthropic-191919?style=flat-square&logo=anthropic&logoColor=white)
-![OpenAI](https://img.shields.io/badge/-OpenAI-412991?style=flat-square&logo=openai&logoColor=white)
-![macOS](https://img.shields.io/badge/-macOS-000000?style=flat-square&logo=apple&logoColor=white)
-![Linux](https://img.shields.io/badge/-Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
+![prr — Good code deserves a second look](assets/og.png)
 
-Run AI-powered code reviews on GitHub pull requests or local git branches. Outputs structured, human-readable markdown comments for easy copy-paste into GitHub.
+[![CI](https://github.com/smeltery/prr/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/prr/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/smeltery/prr)](https://github.com/smeltery/prr/releases)
+[![License](https://img.shields.io/badge/license-PolyForm_Shield-f59e0b)](LICENSE)
+[![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=white)](go.mod)
+[![Bun](https://img.shields.io/badge/Bun-14151A?logo=bun&logoColor=white)](package.json)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)](website/)
+[![Flox](https://img.shields.io/badge/dev_env-Flox-8b5cf6)](.flox/env/manifest.toml)
+[![macOS · Linux](https://img.shields.io/badge/macOS_·_Linux-475569)](docs/installation.md)
 
-## Quick Start
+prr gathers the diff and surrounding code, asks your chosen agent for a review, verifies the findings, and writes readable Markdown organized by severity. Use Claude or Codex CLI sessions, or connect Anthropic and OpenAI APIs. Browse results locally and post to GitHub when you're ready.
 
-```sh
-# Install
-go install github.com/dotbrains/prr@latest
-
-# Review the current branch's PR
-prr
-
-# Review a specific PR
-prr 17509
-
-# Review with a specific agent
-prr 17509 --agent gpt
-
-# Review with all configured agents
-prr 17509 --all
-
-# Review any PR by URL (no need to clone or cd into the repo)
-prr https://github.com/owner/repo/pull/123
-
-# Review a local branch against main (no PR required)
-prr --base main
-
-# Review a specific repo and branch
-prr --repo /path/to/repo --base main --head feature-branch
-
-# Focus review on specific areas
-prr 17509 --focus security,performance
-
-# Verify comment accuracy with a secondary AI pass
-prr 17509 --verify
-
-# Post review directly to GitHub
-prr post
-
-# Generate a PR description
-prr describe 17509
-prr describe 17509 --update   # push to GitHub
-
-# Ask follow-up questions about a review
-prr ask "Is this race condition exploitable?"
-
-# Compare two review runs
-prr diff ~/.local/share/prr/reviews/pr-123-run1 ~/.local/share/prr/reviews/pr-123-run2
-
-# Skip codebase pattern analysis
-prr 17509 --no-context
-```
-
-## How It Works
-
-**PR mode** (default):
-1. Resolves the PR number (from an argument, URL, or auto-detects from the current branch via `gh`).
-2. Fetches the PR diff and metadata using the GitHub CLI.
-3. Sends the diff to an AI agent (Claude by default).
-4. Writes structured review comments to `~/.local/share/prr/reviews/pr-<number>-<timestamp>/`.
-
-**URL mode** (pass a PR URL):
-1. Parses the GitHub PR URL to extract owner, repo, and PR number.
-2. Uses `gh -R owner/repo` to fetch diff and metadata remotely — no cloning needed.
-3. Review proceeds identically to PR mode.
-
-**Local mode** (`--repo` or `--base`):
-1. Diffs two branches in any local git repo (no GitHub PR needed).
-2. Sends the diff to an AI agent.
-3. Writes review comments to `~/.local/share/prr/reviews/review-<base>-vs-<head>-<timestamp>/`.
-
-In both modes, `prr` automatically reads sibling files from the same directories as the changed files to give the AI context about established codebase patterns. This can be disabled with `--no-context` or `review.codebase_context: false` in the config.
-
-With `--verify`, `prr` runs a secondary AI pass on each comment to fact-check it against the actual diff and full source file — catching hallucinated line numbers, wrong variable names, and inaccurate behavioral claims. Inaccurate comments are dropped by default (or kept with annotations via `--verify-action annotate`).
-
-Output is organized into severity-based subdirectories (`critical/`, `suggestion/`, `nit/`, `praise/`), each containing one markdown file per reviewed source file — designed for direct copy-paste into GitHub's PR review interface.
-
-## Installation
-
-### Via `go install`
+## Get started
 
 ```sh
-go install github.com/dotbrains/prr@latest
-```
-
-### Via Homebrew
-
-```sh
-brew tap dotbrains/tap
-brew install --cask prr
-```
-
-### Via GitHub Release
-
-```sh
-gh release download --repo dotbrains/prr --pattern 'prr_darwin_arm64.tar.gz' --dir /tmp
-tar -xzf /tmp/prr_darwin_arm64.tar.gz -C /usr/local/bin
-```
-
-### From source
-
-```sh
-git clone https://github.com/dotbrains/prr.git
-cd prr
-make install
-```
-
-## Configuration
-
-```sh
-# Create default config
-prr config init
-
-# Set your API key
-export ANTHROPIC_API_KEY=sk-...
-
-# Check agent status
+go install github.com/smeltery/prr@latest
 prr agents
+prr                                      # Current branch's PR
+prr https://github.com/owner/repo/pull/123
+prr --base main                          # Local branch review
+prr serve --open                         # Browse saved reviews
 ```
 
-Config lives at `~/.config/prr/config.yaml`.
+PR reviews require an authenticated [GitHub CLI](https://cli.github.com/). Configure an [agent](docs/agents.md) first; `claude-cli` is the default. Review data is sent to the selected provider. Nothing is posted automatically.
 
-To disable codebase pattern analysis by default:
+## Documentation
 
-```yaml
-review:
-  codebase_context: false
-```
+Start with [docs/](docs/README.md): [installation](docs/installation.md), [reviewing changes](docs/reviews.md), [configuration](docs/configuration.md), [output](docs/output.md), and the [command reference](docs/commands.md). The website renders these same Markdown files.
 
-To only see specific severity levels (e.g. skip nits and praise):
-
-```yaml
-output:
-  severities:
-    - critical
-    - suggestion
-```
-
-To disable comment verification (enabled by default):
-
-```yaml
-review:
-  verify: false
-```
-
-Or for a single run:
+## Develop
 
 ```sh
-prr 17509 --no-verify
+flox activate
+make setup          # Locked Bun dependencies and Git hooks
+make ci             # Shared checks, race tests and builds
 ```
 
-See [SPEC.md](SPEC.md) for the full config format.
+Run `flox activate --start-services` for the website at `http://localhost:3004`. See [development](docs/development.md) for CI, release automation, Mermaid validation and LOC budgets.
 
-## Commands
-
-| Command | Description |
-|---|---|
-| `prr [PR_NUMBER]` | Run AI code review on a PR |
-| `prr <PR_URL>` | Review any PR by URL (no need to be in the repo) |
-| `prr --base <branch>` | Review current branch against a base branch (local mode) |
-| `prr --repo <path> --base <branch>` | Review a specific local repo |
-| `prr agents` | List configured agents and their status |
-| `prr post` | Post a review to GitHub as a PR review |
-| `prr describe [PR_NUMBER]` | Generate an AI-written PR description |
-| `prr ask <question>` | Ask follow-up questions about a review |
-| `prr diff <dir1> <dir2>` | Compare two review outputs |
-| `prr config init` | Create default config file |
-| `prr history` | List past reviews |
-| `prr clean` | Remove old review output |
-| `prr serve` | Start a local web UI to browse reviews |
-
-## Web UI
-
-Browse reviews in a local web interface:
-
-```sh
-# Start the review browser
-prr serve
-
-# Custom port + auto-open browser
-prr serve --port 9000 --open
-```
-
-All assets are embedded in the binary — no external dependencies. The UI uses the same dark theme as the marketing site.
-
-Features:
-- **Dashboard** — two-column grid of review cards with severity badges and relative timestamps
-- **Search** — filter reviews by PR number, repo, agent, or summary
-- **⌘K command palette** — quick-navigate to any review, plus context-aware commands on detail pages (filter by severity, copy all comments, open PR on GitHub)
-- **Detail view** — two-column layout with sticky sidebar (severity filter, summary, file nav) and scrollable comments
-- **GitHub integration** — clickable repo slug, commit SHA, line numbers, and file headers link directly to GitHub
-- **Copy to clipboard** — copy individual comments or all visible comments as markdown
-- **Severity filtering** — toggle severity levels to focus on what matters
-
-## Output
-
-PR reviews:
-```
-~/.local/share/prr/reviews/
-  pr-17509-20250311-143000/
-    summary.md                        # Overall review
-    critical/
-      src-auth-handler-go.md          # Per-file comments
-    suggestion/
-      src-middleware-session-go.md
-    nit/
-      src-auth-handler-go.md
-```
-
-Local branch reviews:
-```
-~/.local/share/prr/reviews/
-  review-main-vs-feature-auth-20250311-143000/
-    summary.md
-    critical/
-      src-auth-handler-go.md
-    suggestion/
-      src-auth-handler-go.md
-```
-
-Comments are organized into subdirectories by severity level (`critical`, `suggestion`, `nit`, `praise`). Only directories with comments are created.
-
-## Dependencies
-
-- **[git](https://git-scm.com/)** — required for local mode
-- **[gh](https://cli.github.com/)** — GitHub CLI (required for PR mode)
-- **API key** — for your chosen AI provider (e.g. `ANTHROPIC_API_KEY` for Claude)
-
-## License
-
-This project is licensed under the [PolyForm Shield License 1.0.0](https://polyformproject.org/licenses/shield/1.0.0/) — see [LICENSE](LICENSE) for details.
+[PolyForm Shield License 1.0.0](LICENSE) · [Credits](THIRD_PARTY_LICENSES.md)

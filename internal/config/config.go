@@ -10,10 +10,10 @@ import (
 
 // Config is the top-level prr configuration.
 type Config struct {
-	DefaultAgent string                `yaml:"default_agent"`
+	DefaultAgent string                 `yaml:"default_agent"`
 	Agents       map[string]AgentConfig `yaml:"agents"`
-	Review       ReviewConfig          `yaml:"review"`
-	Output       OutputConfig          `yaml:"output"`
+	Review       ReviewConfig           `yaml:"review"`
+	Output       OutputConfig           `yaml:"output"`
 }
 
 // AgentConfig defines a single AI agent provider.
@@ -91,8 +91,8 @@ func DefaultConfig() *Config {
 			MaxDiffLines:    10000,
 			CodebaseContext: true,
 			MaxContextLines: 2000,
-		Verify:          true,
-		VerifyAction:    "drop",
+			Verify:          true,
+			VerifyAction:    "drop",
 			IgnorePatterns: []string{
 				"*.lock",
 				"go.sum",

@@ -2,8 +2,8 @@
 
 ![prr](./assets/og-image.svg)
 
-[![CI](https://github.com/dotbrains/prr/actions/workflows/ci.yml/badge.svg)](https://github.com/dotbrains/prr/actions/workflows/ci.yml)
-[![Release](https://github.com/dotbrains/prr/actions/workflows/release.yml/badge.svg)](https://github.com/dotbrains/prr/actions/workflows/release.yml)
+[![CI](https://github.com/smeltery/prr/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/prr/actions/workflows/ci.yml)
+[![Release](https://github.com/smeltery/prr/actions/workflows/release.yml/badge.svg)](https://github.com/smeltery/prr/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Go](https://img.shields.io/badge/-Go-00ADD8?style=flat-square&logo=go&logoColor=white)
@@ -895,7 +895,7 @@ For local mode, only `git` is required. For PR mode, `gh` is required. The AI CL
 ### Via `go install`
 
 ```sh
-go install github.com/dotbrains/prr@latest
+go install github.com/smeltery/prr@latest
 ```
 
 ### Via Homebrew
@@ -918,7 +918,7 @@ Available archives: `prr_darwin_arm64`, `prr_darwin_amd64`, `prr_linux_arm64`, `
 ### From source
 
 ```sh
-git clone https://github.com/dotbrains/prr.git
+git clone https://github.com/smeltery/prr.git
 cd prr
 make install
 ```
@@ -1161,7 +1161,7 @@ homebrew_casks:
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
     name: prr
-    homepage: https://github.com/dotbrains/prr
+    homepage: https://github.com/smeltery/prr
     description: AI-powered PR code review CLI
     license: "MIT"
     binaries: [prr]

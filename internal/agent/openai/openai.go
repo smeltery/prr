@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/dotbrains/prr/internal/agent"
-	"github.com/dotbrains/prr/internal/config"
+	"github.com/smeltery/prr/internal/agent"
+	"github.com/smeltery/prr/internal/config"
 )
 
 const defaultBaseURL = "https://api.openai.com"
@@ -157,4 +157,3 @@ func extractText(resp chatResponse) string {
 	}
 	return resp.Choices[0].Message.Content
 }
-
