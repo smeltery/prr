@@ -113,6 +113,12 @@ test("homepage questions and brand assets work", async ({ page, context, request
   for (const selector of [".scenarios", ".agent-choice", ".saved-reviews", ".faq-section"]) {
     await expect(page.locator(selector)).toBeVisible();
   }
+  await expect(page.locator(".hero h1")).toHaveText("Catch bugsbefore you merge.");
+  for (const logo of await page.locator(".hero-copy img").all()) {
+    expect(await logo.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
+  }
+  await page.getByRole("link", { name: "See a sample review" }).click();
+  await expect(page).toHaveURL(/#review-preview$/);
   const question = page.locator("summary").filter({ hasText: "Does prr post comments automatically?" });
   await question.click();
   await expect(page.locator("details[open]")).toContainText("preview the payload");

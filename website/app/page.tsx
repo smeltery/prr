@@ -2,84 +2,13 @@ import { ReviewScenarios, AgentChoice, SavedReviews, HomeQuestions } from "@/com
 import { Closing } from "@/components/Closing";
 import Link from "next/link";
 import { GitPullRequest, ShieldCheck, FolderGit2, MessagesSquare, FileText, Terminal } from "lucide-react";
-import { AgentStrip } from "@/components/AgentStrip";
+import { Hero } from "@/components/Hero";
 import { CopyButton } from "@/components/CopyButton";
 
 export default function Page() {
   return (
     <main id="main">
-      <section className="hero wrap">
-        <div className="hero-copy">
-          <p className="eyebrow">
-            <span className="status-dot" />A fresh perspective on every pull request
-          </p>
-          <h1>
-            Good code deserves
-            <br />a <em>second look.</em>
-          </h1>
-          <p className="lead">
-            Meet prr. Thoughtful AI code reviews for your pull requests and local branches. Your agents, your workflow,
-            one simple command.
-          </p>
-          <div className="hero-actions">
-            <Link className="button" href="/docs/installation">
-              Start your first review
-            </Link>
-            <Link className="text-link" href="/docs">
-              See how it works
-            </Link>
-          </div>
-          <div className="hero-platforms">
-            <span>Built with Go.</span>
-            <span>Made for macOS &amp; Linux.</span>
-          </div>
-        </div>
-        <div className="review-scene" aria-label="Illustrative review output">
-          <div className="scene-label">
-            <span className="status-dot" />
-            SMALL COMMAND. USEFUL PERSPECTIVE.
-          </div>
-          <div className="terminal">
-            <div className="terminal-top">
-              <span className="window-dots">● ● ●</span>
-              <span>~/projects/your-next-idea</span>
-              <Terminal size={14} />
-            </div>
-            <div className="terminal-body">
-              <p>
-                <span className="terminal-prompt">❯</span> prr 128 --focus security
-              </p>
-              <p className="terminal-muted">Reading pull request #128…</p>
-              <p className="terminal-muted">Gathering codebase context…</p>
-              <p>
-                <span className="terminal-success">✓</span> Review complete
-              </p>
-              <div className="terminal-summary">
-                <span>1 critical</span>
-                <span>2 suggestions</span>
-                <span>1 praise</span>
-              </div>
-            </div>
-          </div>
-          <div className="review-note">
-            <div className="note-header">
-              <span className="severity">Critical</span>
-              <code>auth/session.go : 42</code>
-            </div>
-            <h2>Check the expiry before refreshing.</h2>
-            <p>
-              An expired session can reach the refresh path. Validate <code>ExpiresAt</code> before issuing a new token.
-            </p>
-            <div className="note-foot">
-              <ShieldCheck size={14} /> Verified against the diff <span>Illustrative output</span>
-            </div>
-          </div>
-          <div className="scene-caption">
-            <span className="scene-line" /> More context. Less guesswork.
-          </div>
-        </div>
-      </section>
-      <AgentStrip />
+      <Hero />
       <section id="features" className="section wrap">
         <div className="section-heading">
           <p className="eyebrow">Thoughtful by design</p>

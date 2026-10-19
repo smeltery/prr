@@ -207,9 +207,6 @@ button[hidden],
   letter-spacing: -0.04em;
   white-space: nowrap;
 }
-.brand:hover {
-  text-decoration: none;
-}
 .brand-sub {
   font-weight: 400;
   color: var(--muted);
@@ -259,9 +256,6 @@ button[hidden],
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr 1.1fr;
   gap: 40px;
-}
-.site-footer .brand img {
-  object-fit: contain;
 }
 .footer-brand > p {
   font-family: var(--serif);
