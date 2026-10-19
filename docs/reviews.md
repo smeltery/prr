@@ -61,3 +61,37 @@ prr 123 --all
 ## Incremental review limitation
 
 The CLI currently accepts `--since`, but does not apply it to the review pipeline. Review the full diff or select a narrower local base branch instead.
+
+## Select the comparison deliberately
+
+A PR review uses the PR's base and head information. A local review uses a three-dot Git diff (`base...head`), showing changes on the head since it diverged from the base in the selected repository; `--head` defaults to the current branch. Supplying `--repo` or `--base` selects local mode. Use a feature branch distinct from the base, because comparing a branch to itself produces nothing to review.
+
+```sh
+# Check that both refs exist before requesting a local review.
+git rev-parse --verify main
+git rev-parse --verify feature/auth
+prr --base main --head feature/auth
+```
+
+Commit the changes you want included in the branch comparison. If the required base is only available remotely, fetch it and select the appropriate ref. prr does not turn uncommitted edits into a commit for you.
+
+## Read the scope before the findings
+
+The command reports the selected target and how many files remain after filtering. Check those messages first: the wrong base or an overly broad ignore rule can make a plausible-looking review answer the wrong question.
+
+A large-diff warning is advisory; `max_diff_lines` does not automatically truncate the input. Smaller, cohesive changes are easier to review. `--focus` supplies review priorities, while `--no-context` removes additional codebase context; neither flag is a substitute for choosing the right diff.
+
+## Investigate a disputed finding
+
+Keep annotations while diagnosing verification disagreements, then inspect the saved output:
+
+```sh
+prr 123 --verify-action annotate --min-severity suggestion
+prr serve --open
+```
+
+`--min-severity suggestion` keeps critical findings and suggestions while excluding nits and praise. Check the source location and the conditions described by the finding. Use a follow-up question to ask for the failing input or execution path, then reproduce the problem with a test when practical.
+
+## After the code changes
+
+Run a fresh review after making a fix. Saved directories let you compare the earlier and later results with `prr diff`. This compares review output, not a proof that the underlying bug was fixed. Verify the actual behavior with your project's tests and read the revised diff before posting.

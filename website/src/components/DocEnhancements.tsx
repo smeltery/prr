@@ -4,8 +4,8 @@ import { useEffect } from "react";
 export function DocEnhancements() {
   useEffect(() => {
     const cleanups: (() => void)[] = [];
-    document.querySelectorAll<HTMLElement>(".doc-content pre:not(:has(.language-mermaid))").forEach((pre) => {
-      const text = pre.textContent || "";
+    document.querySelectorAll<HTMLElement>(".doc-content .code-block").forEach((block) => {
+      const text = block.querySelector("code")?.textContent || "";
       const button = document.createElement("button");
       button.textContent = "Copy";
       button.className = "copy-code";
@@ -19,7 +19,7 @@ export function DocEnhancements() {
         }
       };
       button.addEventListener("click", copy);
-      pre.append(button);
+      block.querySelector(".code-toolbar")?.append(button);
       cleanups.push(() => button.remove());
     });
     return () => {

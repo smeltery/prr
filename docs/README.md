@@ -34,3 +34,23 @@ Review files are stored on your machine. The selected AI provider receives the d
 ## What you need
 
 Use Git for local branch reviews and an authenticated GitHub CLI for PR reviews. Configure at least one supported AI agent. The default is the locally installed Claude CLI. Verification is enabled by default, but AI findings still need your judgment.
+
+## A practical review loop
+
+Start with one pull request and one agent. Read the summary, check the cited code, and decide which findings are actionable. After changing the code, run another review and compare the saved directories. You control when a local result becomes a GitHub review.
+
+| Your goal | Start with | What you get |
+| --- | --- | --- |
+| Review an existing PR | `prr 123` | Findings tied to GitHub PR metadata |
+| Review before opening a PR | `prr --base main` | A local comparison of committed branches |
+| Inspect saved findings | `prr serve --open` | A browser for your local review files |
+| Ask about a finding | `prr ask "Which input triggers this?"` | A follow-up answer using saved review context |
+| Share a review | `prr post --dry-run` | A preview of the GitHub payload |
+
+Replace `main` with your repository's base branch. Review commands generate suggestions; they do not replace your test suite or prove that a change is correct. Verification is another model pass against the available evidence, so read the resulting findings before acting on them.
+
+## Review data and boundaries
+
+The diff, selected context, and project review rules form the input to your chosen integration. A CLI provider can still communicate with its remote model service. Saved findings remain on disk until you remove them, and they may contain excerpts of private source code.
+
+Use [configuration](configuration.md) to control context and ignored paths, and [review output](output.md) to understand storage and posting. Disabling extra context does not make a review offline or prevent the diff itself from reaching the provider.

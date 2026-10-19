@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { marked } from "marked";
+import hljs from "highlight.js/lib/common";
 
 export const catalog = [
   ["Overview", "", "Start here"],
@@ -27,9 +28,16 @@ export function getDoc(slug: string) {
   const headings = [...markdown.matchAll(/^## (.+)$/gm)].map((match) => ({ title: match[1], id: headingId(match[1]) }));
   const renderer = new marked.Renderer();
   let diagramIndex = 0;
-  const defaultCode = renderer.code.bind(renderer);
   renderer.code = (token) => {
-    if (token.lang !== "mermaid") return defaultCode(token);
+    if (token.lang !== "mermaid") {
+      const language = token.lang?.split(/\s/)[0] || "text";
+      const supported = Boolean(hljs.getLanguage(language));
+      const code = supported
+        ? `<pre><code class="hljs">${hljs.highlight(token.text, { language }).value}</code></pre>`
+        : marked.Renderer.prototype.code.call(renderer, { ...token, lang: "text" });
+      const label = language === "sh" ? "Shell" : supported ? language.toUpperCase() : "Text";
+      return `<div class="code-block"><div class="code-toolbar"><span>${label}</span></div>${code}</div>`;
+    }
     const name = `${file.replace(/\.md$/, "").toLowerCase()}-${diagramIndex++}`;
     const svg = fs.readFileSync(path.join(process.cwd(), "public", "diagrams", `${name}.svg`), "utf8");
     const dimensions = svg.match(/viewBox="[^"]*? ([\d.]+) ([\d.]+)"/);

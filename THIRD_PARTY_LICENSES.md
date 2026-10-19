@@ -14,6 +14,7 @@ Search layout and keyboard interactions are adapted from [Pyreload](https://gith
 - Lucide: ISC license, with Feather-derived icons under MIT; see the installed package notices.
 - React and Next.js: MIT license.
 - Marked and Mermaid: MIT license.
+- Highlight.js: BSD 3-Clause license; Copyright (c) 2006, Ivan Sagalaev.
 - Git, Apple and Linux marks: SVGs from Simple Icons (CC0-1.0), used to identify supported tools/platforms.
 - GitHub, Claude, OpenAI, v0, T3 Chat, Scira and Cursor brand marks: used only to identify integrations. Trademarks remain with their respective owners; no endorsement is implied.
 

@@ -44,3 +44,37 @@ prr describe 123 --update
 ```
 
 The first generates a description. `--update` writes it to GitHub. This is a separate action from posting a review.
+
+## Useful command combinations
+
+```sh
+# Review for actionable issues, keeping verification enabled.
+prr 123 --focus security,testing --min-severity suggestion
+
+# Review a local feature branch with a different agent.
+prr --base main --head feature/auth --agent codex-cli
+
+# Inspect a specific result before posting it.
+prr post /path/to/review --dry-run
+prr post /path/to/review --event comment
+```
+
+Keep the PR number and local branch forms separate. A number resolves in the current GitHub repository; a full PR URL identifies another repository explicitly. `--base` or `--repo` selects a local comparison.
+
+## Output and maintenance flags
+
+| Command and flag | Behavior |
+| --- | --- |
+| `prr --no-praise` | Excludes positive comments from review output |
+| `prr --min-severity suggestion` | Keeps critical findings and suggestions |
+| `prr serve --port 9000` | Uses a different review-browser port |
+| `prr serve --open` | Opens the review browser automatically |
+| `prr clean --days 30 --dry-run` | Lists old review directories without deleting them |
+| `prr clean --days 30` | Deletes matching old review directories |
+| `prr config init --force` | Replaces the existing user configuration with defaults |
+
+`--output-dir` also applies to commands that read stored reviews, such as `history`, `serve`, and `post`. Use the same location across a workflow or supply an explicit review directory where supported.
+
+## Commands that write remotely
+
+Running a review saves local files. `prr post` submits the saved review to GitHub; `prr describe --update` updates the PR description. Preview or read generated content before invoking either publishing action. A successful command means the operation completed, not that the AI's conclusions have been independently proven.

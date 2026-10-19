@@ -73,19 +73,12 @@
   .docs-layout {
     display: block;
   }
-  .docs-sidebar {
-    position: static;
-    height: auto;
-    padding: 16px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
   .docs-sidebar p,
   .docs-home {
     display: none;
   }
   .docs-main {
-    padding: 36px 20px 0;
+    padding-top: 36px;
   }
 }
 .docs-toc {
@@ -100,10 +93,4 @@
 .docs-toc p {
   font-size: 9px;
   letter-spacing: 1px;
-}
-
-@media (max-width: 1100px) {
-  .docs-toc {
-    display: none;
-  }
 }
