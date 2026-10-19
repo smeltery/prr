@@ -2,6 +2,7 @@ version: 2
 
 builds:
   - binary: prr
+    env: [CGO_ENABLED=0]
     goos: [darwin, linux]
     goarch: [amd64, arm64]
     ldflags:
