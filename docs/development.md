@@ -28,7 +28,7 @@ make website
 pre-commit run --all-files
 ```
 
-`make check` checks Go formatting and vet, workflow syntax, Markdown style, local documentation links, Mermaid syntax, the website type checker and linter, and authored source line budgets. The pre-commit hook runs the same checks. `make test` runs Go race tests and checks the 79% coverage floor; pre-push runs tests and the production website build, matching CI.
+`make check` checks Go formatting and vet, workflow syntax, Markdown style, local documentation links, Mermaid syntax, the website type checker and linter, and authored source line budgets. The pre-commit hook runs the same checks. `make test` runs Go race tests and checks the 79% coverage floor; pre-push runs tests, the production website build, browser checks, and release cross-compilation, matching CI.
 
 ## Keep the implementation lean
 
@@ -61,3 +61,29 @@ CI validates Mermaid syntax and checks that each SVG matches its source hash. Br
 ## Website verification
 
 Use the Maestri portal or your browser to inspect `/`, `/docs`, narrow-screen navigation, search, code copying and unknown routes. Run the production build before delivery. Brand assets live in `website/public`; the README shares copies in `assets/`.
+
+## Editing documentation
+
+Add explanations and examples to the relevant guide in `docs/`. Use a language on each fenced block: `sh` for commands, `yaml` for configuration, `text` for output, and `mermaid` for diagrams. Code highlighting is generated during the site build; the Copy button copies the original code text without language labels or markup.
+
+```mermaid
+flowchart TD
+  Edit[Edit a Markdown guide] --> Diagram{Diagram changed?}
+  Diagram -->|Yes| Render[Run bun run diagrams]
+  Diagram -->|No| Check[Run make check]
+  Render --> Check
+  Check --> Build[Build the website]
+  Build --> Browser[Run browser tests and inspect the page]
+```
+
+Keep diagrams focused on a decision or sequence that benefits from a visual explanation. Follow each diagram with prose so readers can understand the workflow from the Markdown source or without interpreting the image. Commit the generated SVG alongside its source change.
+
+## Reproduce a release build
+
+```sh
+make release-check
+```
+
+This creates snapshot binaries for macOS and Linux on Intel and ARM without publishing a release. GoReleaser disables CGO for these portable binaries; normal race tests retain their own build settings. The cross-compilation check runs in CI and the pre-push hook, and `make ci` includes it with the full validation suite.
+
+If a check fails, fix the first reported error and rerun the relevant command before running the complete suite. Do not raise the LOC ceiling to hide duplicate components or CSS; prefer shared rendering and remove rules that are already overridden.

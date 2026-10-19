@@ -208,3 +208,29 @@ for (const width of [320, 1440]) {
     await expect(trigger).toBeFocused();
   });
 }
+
+for (const width of [320, 1440]) {
+  test(`code blocks keep controls separate from highlighted content at ${width}px`, async ({ page, context }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/docs/installation");
+    const block = page.locator(".code-block").first();
+    await expect(block.locator(".code-toolbar")).toContainText("Shell");
+    const pre = await block.locator("pre").boundingBox();
+    const code = await block.locator("code").boundingBox();
+    expect(code!.y - pre!.y).toBeLessThan(25);
+    await block.getByRole("button", { name: "Copy code", exact: true }).click();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe("go install github.com/smeltery/prr@latest");
+    await page.goto("/docs/configuration");
+    expect(await page.locator(".hljs-attr").count()).toBeGreaterThan(0);
+    const yaml = page.locator(".code-block").filter({ hasText: "default_agent" }).first();
+    await yaml.locator("pre").evaluate((element) => { element.scrollLeft = element.scrollWidth; });
+    await yaml.getByRole("button", { name: "Copy code", exact: true }).click();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(await yaml.locator("code").textContent());
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    for (const diagram of await page.locator(".mermaid-diagram img").all()) {
+      await diagram.scrollIntoViewIfNeeded();
+      await expect.poll(() => diagram.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    }
+  });
+}
