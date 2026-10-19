@@ -1,10 +1,8 @@
-<p align="center"><img src="assets/logo.svg" width="64" alt="prr logo"></p>
+# <img src="assets/logo.svg" width="36" height="36" alt=""> prr
 
-# prr
+**Catch bugs before you merge.** AI code reviews for GitHub pull requests and local branches, right in your terminal.
 
-**A second look. A better change.** AI code reviews for GitHub pull requests and local branches, right in your terminal.
-
-![prr — Good code deserves a second look](assets/og.png)
+![prr — Catch bugs before you merge](assets/og.png)
 
 [![CI](https://github.com/smeltery/prr/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/prr/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/smeltery/prr)](https://github.com/smeltery/prr/releases)

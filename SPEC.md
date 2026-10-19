@@ -467,7 +467,7 @@ $ prr clean --days 7
 4. Resolves head branch (`--head`, or current branch via `git rev-parse --abbrev-ref HEAD`).
 5. If base == head, exits with an error.
 
-**PR mode** (default) — the `prr` command shares the same resolution pattern as other dotbrains CLIs:
+**PR mode** (default) — the `prr` command shares the same resolution pattern as other smeltery CLIs:
 1. If the positional argument is a GitHub PR URL, parse owner/repo/number from it and use `gh -R owner/repo` for all operations.
 2. If the positional argument is a number, use it as the PR number.
 3. Otherwise, run `gh pr status --json number` and extract `currentBranch.number`.
@@ -901,7 +901,7 @@ go install github.com/smeltery/prr@latest
 ### Via Homebrew
 
 ```sh
-brew tap dotbrains/tap
+brew tap smeltery/tap
 brew install --cask prr
 ```
 
@@ -909,7 +909,7 @@ brew install --cask prr
 
 ```sh
 # macOS Apple Silicon
-gh release download --repo dotbrains/prr --pattern 'prr_darwin_arm64.tar.gz' --dir /tmp
+gh release download --repo smeltery/prr --pattern 'prr_darwin_arm64.tar.gz' --dir /tmp
 tar -xzf /tmp/prr_darwin_arm64.tar.gz -C /usr/local/bin
 ```
 
@@ -1157,7 +1157,7 @@ builds:
 
 homebrew_casks:
   - repository:
-      owner: dotbrains
+      owner: smeltery
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
     name: prr
