@@ -12,7 +12,7 @@ repos:
         stages: [pre-commit]
       - id: shared-build-tests
         name: Race tests and production builds (Flox)
-        entry: flox activate -- make test build website browser-test
+        entry: flox activate -- make test build website browser-test release-check
         language: system
         pass_filenames: false
         always_run: true

@@ -2,7 +2,7 @@ BINARY := prr
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 LDFLAGS := -s -w -X main.version=$(VERSION)
 
-.PHONY: build install deps setup check test lint vet website ci clean cover browser-test
+.PHONY: build install deps setup check test lint vet website ci clean cover browser-test release-check
 .DEFAULT_GOAL := build
 
 build:
@@ -34,7 +34,9 @@ website:
 	bun run --cwd website build
 browser-test:
 	bun run test:website
-ci: check test build website browser-test
+release-check:
+	goreleaser build --snapshot --clean
+ci: check test build website browser-test release-check
 clean:
 	rm -f $(BINARY) coverage.out
 cover: test

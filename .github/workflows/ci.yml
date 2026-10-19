@@ -24,6 +24,8 @@ jobs:
         run: flox activate -- make deps
       - name: Shared checks and production website
         run: flox activate -- make check website
+      - name: Cross-compile release binaries
+        run: flox activate -- make release-check
       - name: Install browser
         run: flox activate -- bunx playwright install --with-deps chromium
       - name: Browser journeys, responsive layout and accessibility
