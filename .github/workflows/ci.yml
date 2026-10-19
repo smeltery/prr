@@ -28,7 +28,7 @@ jobs:
         run: flox activate -- bunx playwright install --with-deps chromium
       - name: Browser journeys, responsive layout and accessibility
         run: flox activate -- make browser-test
-      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: failure()
         with:
           name: browser-report
@@ -46,7 +46,7 @@ jobs:
       - uses: flox/install-flox-action@5bb9eaaffbeaa699a8251a1ae21ecf4c8e0e37d4 # v2
       - name: Race tests, coverage floor and binary build
         run: flox activate -- make test build
-      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: coverage-${{ matrix.os }}
           path: coverage.out
