@@ -185,9 +185,7 @@ button[hidden],
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(23, 28, 26, 0.96);
   padding-block: 16px 0;
-  backdrop-filter: blur(12px);
 }
 .header-inner {
   height: 66px;
@@ -196,6 +194,7 @@ button[hidden],
   gap: 12px;
   border: 1px solid var(--line);
   background: #202823ed;
+  backdrop-filter: blur(12px);
   border-radius: 999px;
   padding-inline: 22px;
 }
