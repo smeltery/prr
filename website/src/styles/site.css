@@ -85,3 +85,5 @@ h2 em { font-family: var(--serif); font-weight: 400; color: var(--accent); }
 .agent-strip img { filter: brightness(0) invert(1); }
 
 .icon-link img { filter: brightness(0) invert(1); }
+
+html:has(dialog[open]) { overflow: hidden; }

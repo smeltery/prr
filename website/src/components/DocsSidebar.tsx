@@ -7,7 +7,6 @@ export function DocsSidebar({ catalog, slug }: { catalog: string[][]; slug: stri
   const dialog = useRef<HTMLDialogElement>(null);
   function close() {
     dialog.current?.close();
-    document.documentElement.style.overflow = "";
   }
   const navigation = (
     <nav aria-label="Documentation pages">
@@ -33,7 +32,6 @@ export function DocsSidebar({ catalog, slug }: { catalog: string[][]; slug: stri
         <button
           onClick={() => {
             dialog.current?.showModal();
-            document.documentElement.style.overflow = "hidden";
           }}
           aria-haspopup="dialog"
           aria-controls="docs-menu"

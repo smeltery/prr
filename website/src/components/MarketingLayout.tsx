@@ -15,7 +15,6 @@ export function MarketingNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   function unlock() {
-    document.documentElement.style.overflow = "";
     setMenuOpen(false);
   }
   function close() {
@@ -24,10 +23,9 @@ export function MarketingNav() {
     unlock();
   }
   function openSearch() {
-    mobile.current?.close();
+    document.querySelectorAll<HTMLDialogElement>("dialog[open]").forEach((dialog) => dialog.close());
     setMenuOpen(false);
     search.current?.showModal();
-    document.documentElement.style.overflow = "hidden";
   }
   useEffect(() => {
     function shortcut(e: KeyboardEvent) {
@@ -39,13 +37,11 @@ export function MarketingNav() {
     document.addEventListener("keydown", shortcut);
     return () => {
       document.removeEventListener("keydown", shortcut);
-      document.documentElement.style.overflow = "";
     };
   }, []);
   useEffect(() => {
     mobile.current?.close();
     search.current?.close();
-    document.documentElement.style.overflow = "";
     setMenuOpen(false);
   }, [pathname]);
   const results = pages.filter((page) => page.join(" ").toLowerCase().includes(query.toLowerCase()));
@@ -86,7 +82,6 @@ export function MarketingNav() {
             onClick={() => {
               mobile.current?.showModal();
               setMenuOpen(true);
-              document.documentElement.style.overflow = "hidden";
             }}
           >
             Menu <Menu size={18} />
@@ -139,7 +134,7 @@ export function MarketingNav() {
             {results.length} results
           </p>
           {results.map(([title, slug, description]) => (
-            <Link className="search-result" key={slug} href={`/docs/${slug}`}>
+            <Link className="search-result" key={slug} href={`/docs/${slug}`} onClick={close}>
               <BookOpen size={20} />
               <span>
                 <strong>{title}</strong>

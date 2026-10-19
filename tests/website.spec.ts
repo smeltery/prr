@@ -50,7 +50,7 @@ for (const width of [320, 390, 768, 1440]) {
       await page.keyboard.press("Escape");
       await expect(page.getByRole("dialog", { name: "What’s next?" })).not.toBeVisible();
       await expect(page.getByRole("button", { name: "Menu", exact: true })).toBeFocused();
-      expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe("");
+      expect(await page.evaluate(() => getComputedStyle(document.documentElement).overflow)).not.toBe("hidden");
     }
   });
 }
@@ -68,7 +68,7 @@ test("search supports empty results, keyboard navigation and route changes", asy
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/docs\/configuration$/);
   await expect(page.getByRole("dialog")).not.toBeVisible();
-  expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe("");
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).overflow)).not.toBe("hidden");
 });
 
 test("diagrams, copy, metadata and not found states", async ({ page, context }) => {
@@ -88,4 +88,21 @@ test("diagrams, copy, metadata and not found states", async ({ page, context }) 
   await expect(page.locator('meta[property="og:image"]')).not.toHaveAttribute("content", /localhost/);
   expect((await page.goto("/not-a-real-page"))?.status()).toBe(404);
   await expect(page.getByRole("heading", { name: "A small detour." })).toBeVisible();
+});
+
+test("mobile search restores scrolling and closes on the current page", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/docs/installation");
+  await page.getByRole("button", { name: "Menu", exact: true }).click();
+  await page.getByRole("button", { name: "Search docs & guides" }).click();
+  await expect(page.getByRole("searchbox")).toBeFocused();
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).overflow)).toBe("hidden");
+  await page.getByRole("searchbox").fill("installation");
+  await page.locator(".search-result").click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).overflow)).not.toBe("hidden");
+  await page.getByRole("button", { name: "Documentation", exact: true }).click();
+  await expect(page.getByRole("dialog", { name: "Documentation navigation" })).toBeVisible();
+  await page.getByRole("dialog").getByRole("link", { name: "Agents", exact: true }).click();
+  await expect(page).toHaveURL(/\/docs\/agents$/);
 });

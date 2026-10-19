@@ -30,12 +30,12 @@ export function MobileMenuContent({ close, openSearch }: { close: () => void; op
             </span>
           </Link>
           <div className="mobile-resource-grid">
-            <Link href="/docs/installation">
+            <Link href="/docs/installation" onClick={close}>
               <BookOpen size={20} />
               <strong>Getting started</strong>
               <small>From install to your first review.</small>
             </Link>
-            <Link href="/docs">
+            <Link href="/docs" onClick={close}>
               <ShieldCheck size={20} />
               <strong>Documentation</strong>
               <small>A thoughtful review, step by step.</small>
@@ -56,7 +56,7 @@ export function MobileMenuContent({ close, openSearch }: { close: () => void; op
             ].map(([Icon, title, slug]) => {
               const Symbol = Icon as typeof Terminal;
               return (
-                <Link key={String(slug)} href={`/docs/${slug}`}>
+                <Link key={String(slug)} href={`/docs/${slug}`} onClick={close}>
                   <span className="nav-card-icon">
                     <Symbol size={18} />
                   </span>
@@ -70,7 +70,9 @@ export function MobileMenuContent({ close, openSearch }: { close: () => void; op
           <p className="eyebrow">Not sure where to begin?</p>
           <h3>Your next PR is a good start.</h3>
           <p>Install prr, choose your agent, and get a fresh perspective on your code.</p>
-          <Link href="/docs/installation">Run your first review</Link>
+          <Link href="/docs/installation" onClick={close}>
+            Run your first review
+          </Link>
         </aside>
       </div>
       <div className="mobile-panel-footer">
