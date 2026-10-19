@@ -8,7 +8,7 @@
 
 [![CI](https://github.com/smeltery/prr/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/prr/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/smeltery/prr)](https://github.com/smeltery/prr/releases)
-[![License](https://img.shields.io/badge/license-PolyForm_Shield-f59e0b)](LICENSE)
+[![License](https://img.shields.io/badge/license-PolyForm_Shield-b8d9a2)](LICENSE)
 [![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=white)](go.mod)
 [![Bun](https://img.shields.io/badge/Bun-14151A?logo=bun&logoColor=white)](package.json)
 [![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)](website/)

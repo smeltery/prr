@@ -12,6 +12,10 @@ export default function Credits() {
         distributed under the PolyForm Shield license.
       </p>
       <p>
+        The brand-page structure follows <Link href="https://smeltery-labs.vercel.app/brand/">Smeltery Labs</Link>, with
+        original prr copy, colors, and assets.
+      </p>
+      <p>
         GitHub, Claude, and OpenAI marks identify their respective integrations and remain the property of their owners.
         Their use does not imply endorsement.
       </p>

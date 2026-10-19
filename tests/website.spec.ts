@@ -40,7 +40,7 @@ for (const route of routes) {
 for (const width of [320, 390, 768, 1440]) {
   test(`reflow and navigation at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
-    for (const route of ["/", "/docs", "/docs/commands"]) {
+    for (const route of ["/", "/brand", "/docs", "/docs/commands"]) {
       await page.goto(route);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), route).toBe(true);
     }
@@ -105,4 +105,26 @@ test("mobile search restores scrolling and closes on the current page", async ({
   await expect(page.getByRole("dialog", { name: "Documentation navigation" })).toBeVisible();
   await page.getByRole("dialog").getByRole("link", { name: "Agents", exact: true }).click();
   await expect(page).toHaveURL(/\/docs\/agents$/);
+});
+
+test("homepage questions and brand assets work", async ({ page, context, request }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/");
+  for (const selector of [".scenarios", ".agent-choice", ".saved-reviews", ".faq-section"]) {
+    await expect(page.locator(selector)).toBeVisible();
+  }
+  const question = page.locator("summary").filter({ hasText: "Does prr post comments automatically?" });
+  await question.click();
+  await expect(page.locator("details[open]")).toContainText("preview the payload");
+  await question.click();
+  await expect(page.locator("details[open]")).toHaveCount(0);
+  await page.goto("/brand");
+  await page.getByRole("button", { name: "Copy Celadon #b8d9a2" }).click();
+  await expect(page.getByRole("status")).toContainText("Celadon #b8d9a2 copied");
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe("#b8d9a2");
+  for (const path of ["/logo.svg", "/og.png", "/favicon.png"]) {
+    const asset = await request.get(path);
+    expect(asset.ok()).toBe(true);
+    expect(asset.headers()["content-type"]).toMatch(/^image\//);
+  }
 });

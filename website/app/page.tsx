@@ -1,3 +1,4 @@
+import { ReviewScenarios, AgentChoice, SavedReviews, HomeQuestions } from "@/components/HomeDetails";
 import { Closing } from "@/components/Closing";
 import Link from "next/link";
 import { GitPullRequest, ShieldCheck, FolderGit2, MessagesSquare, FileText, Terminal } from "lucide-react";
@@ -137,6 +138,7 @@ export default function Page() {
           })}
         </div>
       </section>
+      <ReviewScenarios />
       <section id="how-it-works" className="workflow-section">
         <div className="wrap">
           <div className="section-heading">
@@ -178,6 +180,8 @@ export default function Page() {
           </div>
         </div>
       </section>
+      <AgentChoice />
+      <SavedReviews />
       <section id="quick-start" className="section wrap quick-start">
         <div>
           <p className="eyebrow">Less setup. More perspective.</p>
@@ -207,6 +211,7 @@ export default function Page() {
           <p>Requires Go, GitHub CLI for PRs, and a configured agent.</p>
         </div>
       </section>
+      <HomeQuestions />
       <Closing />
     </main>
   );

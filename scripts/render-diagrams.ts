@@ -41,10 +41,10 @@ try {
             securityLevel: "strict",
             theme: "dark",
             themeVariables: {
-              primaryColor: "#2d3748",
-              primaryTextColor: "#fefdfb",
-              primaryBorderColor: "#f59e0b",
-              lineColor: "#fbbf24",
+              primaryColor: "#2a352f",
+              primaryTextColor: "#f3f1e8",
+              primaryBorderColor: "#b8d9a2",
+              lineColor: "#d0e8bf",
               fontFamily: "Arial, sans-serif",
             },
           });
