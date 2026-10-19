@@ -31,12 +31,12 @@ export default function BrandPage() {
           One small mark. <em>A clearer signal.</em>
         </h2>
         <p className="lede">
-          Three commit nodes and two converging branches. A precise Git-inspired mark for reviewing changes before they
-          merge. Keep its original colors and proportions, with room around it.
+          Three commit nodes form a P-shaped branch graph. A Git-inspired mark for prr and the changes you review before
+          they merge. Keep its original colors and proportions, with room around it.
         </p>
         <div className="marks">
           <figure className="mark-preview">
-            <Image src="/logo.svg" alt="prr Git branch and commit mark" width={150} height={150} />
+            <Image src="/logo.svg" alt="prr P-shaped Git branch and commit mark" width={150} height={150} />
             <figcaption>Original mark</figcaption>
           </figure>
           <figure className="signature-preview">
