@@ -7,3 +7,12 @@ coverage.out
 
 # OS
 .DS_Store
+
+# Local tools and verification
+.website-studio/
+node_modules/
+.flox/run/
+.flox/cache/
+
+playwright-report/
+test-results/

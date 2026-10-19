@@ -93,7 +93,6 @@ agents:
 	}
 }
 
-
 func TestRunConfigInit(t *testing.T) {
 	tmp := t.TempDir()
 	t.Setenv("HOME", tmp)

@@ -157,4 +157,3 @@ func extractText(resp chatResponse) string {
 	}
 	return resp.Choices[0].Message.Content
 }
-

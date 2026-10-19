@@ -15,7 +15,7 @@ homebrew_casks:
     name: prr
     homepage: https://github.com/smeltery/prr
     description: AI-powered PR code review CLI
-    license: "MIT"
+    license: "PolyForm-Shield-1.0.0"
     binaries: [prr]
     hooks:
       post:

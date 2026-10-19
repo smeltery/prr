@@ -1,0 +1,58 @@
+name: Auto release
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [master]
+    types: [completed]
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: auto-release-master
+  cancel-in-progress: false
+
+jobs:
+  cut-release:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - name: Compute next patch tag for the tested commit
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --tags origin
+          head="$(git rev-parse HEAD)"
+          existing="$(git tag --points-at "$head" | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1 || true)"
+          if [ -n "$existing" ]; then
+            echo "tag=$existing" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          latest="$(git tag --list | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1 || true)"
+          next=v0.1.0
+          if [ -n "$latest" ]; then
+            version="${latest#v}"
+            next="v${version%.*}.$((${version##*.} + 1))"
+          fi
+          git tag "$next" "$head"
+          git push origin "$next"
+          echo "tag=$next" >> "$GITHUB_OUTPUT"
+      - name: Dispatch release build if not already published
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh workflow run release.yml --ref master -f tag="$RELEASE_TAG"
+          fi

@@ -1,0 +1,10 @@
+# prr
+
+AI code review for GitHub pull requests and local Git branches.
+
+- Repository: https://github.com/smeltery/prr
+- Documentation source: https://github.com/smeltery/prr/tree/master/docs
+- Install: go install github.com/smeltery/prr@latest
+- Default agent: claude-cli; verification enabled by default.
+- Reviews write local Markdown. prr post explicitly submits a GitHub review.
+- The --since flag is accepted but currently does not change review scope.

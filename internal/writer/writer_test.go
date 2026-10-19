@@ -175,8 +175,8 @@ func TestWrite_MultiAgent(t *testing.T) {
 
 	// Check both agent directories
 	for _, tc := range []struct {
-		agent   string
-		sev     string
+		agent string
+		sev   string
 	}{
 		{"claude", "nit"},
 		{"gpt", "suggestion"},

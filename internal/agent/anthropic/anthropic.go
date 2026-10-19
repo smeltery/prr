@@ -162,4 +162,3 @@ func extractText(resp messagesResponse) string {
 	}
 	return ""
 }
-

@@ -1,120 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#020617;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.2" />
-      <stop offset="50%" style="stop-color:#d97706;stop-opacity:0.3" />
-      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.2" />
-    </linearGradient>
-  </defs>
-
-  <!-- Background -->
-  <rect width="1200" height="630" fill="url(#bgGradient)"/>
-
-  <!-- Decorative grid pattern -->
-  <g opacity="0.03">
-    <line x1="0" y1="150" x2="1200" y2="150" stroke="#fff" stroke-width="1"/>
-    <line x1="0" y1="315" x2="1200" y2="315" stroke="#fff" stroke-width="1"/>
-    <line x1="0" y1="480" x2="1200" y2="480" stroke="#fff" stroke-width="1"/>
-    <line x1="300" y1="0" x2="300" y2="630" stroke="#fff" stroke-width="1"/>
-    <line x1="600" y1="0" x2="600" y2="630" stroke="#fff" stroke-width="1"/>
-    <line x1="900" y1="0" x2="900" y2="630" stroke="#fff" stroke-width="1"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>prr — Catch bugs before you merge.</title>
+  <desc>A terminal review and an annotated finding, in prr's charcoal and celadon colors.</desc>
+  <rect width="1200" height="630" fill="#171c1a"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#f3f1e8">
+    <g transform="translate(62 48)"><rect width="40" height="40" rx="8" fill="#b8d9a2"/><g fill="none" stroke="#171c1a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 29V11h10a6 6 0 0 1 0 12H12"/><circle cx="12" cy="11" r="3.5" fill="#b8d9a2"/><circle cx="12" cy="29" r="3.5" fill="#b8d9a2"/><circle cx="28" cy="17" r="3.5" fill="#b8d9a2"/></g></g>
+    <text x="116" y="79" font-size="30" font-weight="600" letter-spacing="-1">smeltery<tspan fill="#aab7ac" font-weight="400"> / prr</tspan></text>
+    <text x="1138" y="76" text-anchor="end" font-size="14" fill="#aab7ac">A second look. A better change.</text>
+    <text x="62" y="220" font-size="62" font-weight="600" letter-spacing="-3">Catch bugs</text>
+    <text x="62" y="291" font-size="62" font-weight="600" letter-spacing="-3">before you</text>
+    <text x="60" y="371" font-family="Georgia, serif" font-style="italic" font-size="76" letter-spacing="-3" fill="#b8d9a2">merge.</text>
+    <text x="64" y="429" font-size="19" fill="#aab7ac">AI reviews for PRs and local branches.</text>
+    <rect x="62" y="469" width="196" height="46" rx="23" fill="#b8d9a2"/>
+    <text x="160" y="498" text-anchor="middle" font-size="15" fill="#171c1a">Meet your next reviewer</text>
+    <rect x="610" y="160" width="528" height="339" rx="18" fill="#202823" stroke="#36453b"/>
+    <rect x="635" y="188" width="478" height="193" rx="10" fill="#111613"/>
+    <g fill="#b8d9a2"><circle cx="653" cy="207" r="3"/><circle cx="665" cy="207" r="3"/><circle cx="677" cy="207" r="3"/></g>
+    <text x="1093" y="211" text-anchor="end" font-family="monospace" font-size="10" fill="#aab7ac">~/projects/your-next-idea</text>
+    <path d="M635 224h478" stroke="#36453b"/>
+    <g font-family="monospace" font-size="14"><text x="657" y="259"><tspan fill="#b8d9a2">❯ </tspan>prr 128</text><text x="657" y="292" fill="#aab7ac">Reading diff and codebase context…</text><text x="657" y="325" fill="#d0e8bf">✓ Review complete</text><text x="657" y="355" font-size="12" fill="#aab7ac">1 critical · 2 suggestions · 1 praise</text></g>
+    <rect x="666" y="370" width="447" height="153" rx="10" fill="#2a352f" stroke="#46594c"/>
+    <rect x="684" y="388" width="54" height="20" rx="4" fill="#523927"/>
+    <text x="711" y="402" text-anchor="middle" font-size="10" fill="#ffd29c">Critical</text><text x="751" y="402" font-size="10" font-family="monospace" fill="#aab7ac">auth/session.go : 42</text>
+    <text x="684" y="437" font-size="16" font-weight="600">Check the expiry before refreshing.</text><text x="684" y="463" font-size="12" fill="#bcc9bf">Validate ExpiresAt before issuing a new token.</text><path d="M684 478h409" stroke="#46594c"/><text x="684" y="501" font-size="10" fill="#d0e8bf">✓ Verified against the diff</text><text x="1094" y="501" text-anchor="end" font-size="9" fill="#aab7ac">Illustrative output</text>
+    <path d="M62 567h1076" stroke="#36453b"/><text x="62" y="599" font-size="12" fill="#aab7ac">AI code review for GitHub pull requests and local branches.</text><text x="1138" y="599" text-anchor="end" font-size="12" fill="#aab7ac">github.com/smeltery/prr</text>
   </g>
-
-  <!-- Accent bar at top -->
-  <rect width="1200" height="4" fill="url(#accentGradient)"/>
-
-  <!-- Logo symbol (code review icon: document with checkmark) -->
-  <g transform="translate(100, 200)">
-    <rect width="100" height="100" rx="20" fill="url(#logoGradient)"/>
-    <g transform="translate(50, 50)" stroke="white" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <!-- Document outline -->
-      <path d="M -18,-24 L 10,-24 L 22,-12 L 22,24 L -18,24 Z" />
-      <!-- Page fold -->
-      <path d="M 10,-24 L 10,-12 L 22,-12" />
-      <!-- Checkmark -->
-      <path d="M -8,4 L -2,10 L 10,-4" stroke-width="4" />
-    </g>
-  </g>
-
-  <!-- Main heading -->
-  <text x="240" y="260" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-size="72" font-weight="700" fill="white" letter-spacing="-1">
-    prr
-  </text>
-
-  <!-- Subtitle -->
-  <text x="240" y="320" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-size="32" font-weight="400" fill="#94a3b8" letter-spacing="0">
-    AI code reviews, one command.
-  </text>
-
-  <!-- Feature highlights -->
-  <g transform="translate(240, 360)">
-    <!-- Badge 1 -->
-    <rect x="0" y="0" width="160" height="40" rx="20" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="80" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-          font-size="15" font-weight="600" fill="#f59e0b" text-anchor="middle">
-      Claude AI
-    </text>
-
-    <!-- Badge 2 -->
-    <rect x="175" y="0" width="160" height="40" rx="20" fill="#1e293b" stroke="#d97706" stroke-width="1.5"/>
-    <text x="255" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-          font-size="15" font-weight="600" fill="#d97706" text-anchor="middle">
-      GPT-4
-    </text>
-
-    <!-- Badge 3 -->
-    <rect x="0" y="55" width="160" height="40" rx="20" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
-    <text x="80" y="81" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-          font-size="15" font-weight="600" fill="#fbbf24" text-anchor="middle">
-      GitHub PRs
-    </text>
-
-    <!-- Badge 4 -->
-    <rect x="175" y="55" width="160" height="40" rx="20" fill="#1e293b" stroke="#fde68a" stroke-width="1.5"/>
-    <text x="255" y="81" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-          font-size="15" font-weight="600" fill="#fde68a" text-anchor="middle">
-      Local Diffs
-    </text>
-  </g>
-
-  <!-- Code snippet decoration -->
-  <g transform="translate(700, 160)">
-    <rect width="400" height="280" rx="12" fill="#0f1117" stroke="#2d3748" stroke-width="2"/>
-
-    <!-- Code header -->
-    <rect width="400" height="40" rx="12" fill="#1e293b"/>
-    <circle cx="20" cy="20" r="5" fill="#ef4444" opacity="0.8"/>
-    <circle cx="40" cy="20" r="5" fill="#f59e0b" opacity="0.8"/>
-    <circle cx="60" cy="20" r="5" fill="#10b981" opacity="0.8"/>
-
-    <!-- Code content -->
-    <text x="20" y="75" font-family="'SF Mono', Monaco, 'Courier New', monospace"
-          font-size="15" fill="#f59e0b" font-weight="500">$ prr 17509</text>
-    <text x="20" y="105" font-family="'SF Mono', Monaco, 'Courier New', monospace"
-          font-size="14" fill="#94a3b8">→ Fetching PR #17509...</text>
-    <text x="20" y="130" font-family="'SF Mono', Monaco, 'Courier New', monospace"
-          font-size="14" fill="#94a3b8">→ Analyzing with Claude...</text>
-    <text x="20" y="155" font-family="'SF Mono', Monaco, 'Courier New', monospace"
-          font-size="14" fill="#10b981">✓ 12 comments generated</text>
-
-    <text x="20" y="195" font-family="'SF Mono', Monaco, 'Courier New', monospace"
-          font-size="15" fill="#f59e0b" font-weight="500">$ prr --base main</text>
-    <text x="20" y="225" font-family="'SF Mono', Monaco, 'Courier New', monospace"
-          font-size="14" fill="#94a3b8">→ Diffing main..feature-auth</text>
-    <text x="20" y="250" font-family="'SF Mono', Monaco, 'Courier New', monospace"
-          font-size="14" fill="#10b981">✓ Review complete.</text>
-  </g>
-
-  <!-- Bottom accent -->
-  <rect y="626" width="1200" height="4" fill="url(#accentGradient)"/>
 </svg>

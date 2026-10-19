@@ -1,0 +1,27 @@
+schema-version = "1.18.0"
+
+[install]
+actionlint.pkg-path = "actionlint"
+bun.pkg-path = "bun"
+gh.pkg-path = "gh"
+git.pkg-path = "git"
+gnumake.pkg-path = "gnumake"
+go.pkg-path = "go"
+golangci-lint.pkg-path = "golangci-lint"
+goreleaser.pkg-path = "goreleaser"
+pre-commit.pkg-path = "pre-commit"
+nodejs_22.pkg-path = "nodejs_22"
+
+[vars]
+NEXT_TELEMETRY_DISABLED = "1"
+
+[hook]
+on-activate = """
+  export PATH="$FLOX_ENV_PROJECT:$PATH"
+"""
+
+[services.website]
+command = "bun run --cwd website dev"
+
+[options]
+systems = ["aarch64-darwin", "x86_64-darwin", "aarch64-linux", "x86_64-linux"]

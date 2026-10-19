@@ -357,7 +357,6 @@ func TestParseFocusModes(t *testing.T) {
 	}
 }
 
-
 func TestShouldVerify(t *testing.T) {
 	// Save and restore.
 	oldVerify := flagVerify
