@@ -234,3 +234,21 @@ for (const width of [320, 1440]) {
     }
   });
 }
+
+for (const width of [320, 1440]) {
+  test(`diagrams retain natural dimensions at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ["/docs", "/docs/configuration", "/docs/installation"]) {
+      await page.goto(route);
+      const figure = page.locator(".mermaid-diagram").first();
+      const diagram = figure.locator("img");
+      await figure.scrollIntoViewIfNeeded();
+      const size = await diagram.boundingBox();
+      expect(size!.width).toBeCloseTo(Number(await diagram.getAttribute("width")), 0);
+      expect(size!.height).toBeCloseTo(Number(await diagram.getAttribute("height")), 0);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      await figure.focus();
+      await expect(figure).toBeFocused();
+    }
+  });
+}
