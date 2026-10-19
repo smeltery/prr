@@ -128,3 +128,34 @@ test("homepage questions and brand assets work", async ({ page, context, request
     expect(asset.headers()["content-type"]).toMatch(/^image\//);
   }
 });
+
+test("documentation actions match the provider menu on desktop and mobile", async ({ page }) => {
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/docs/installation");
+    const actions = page.locator(width > 1100 ? ".docs-toc .doc-actions" : ".mobile-doc-actions .doc-actions");
+    await actions.locator("summary").click();
+    await expect(actions.locator(".chat-providers a")).toHaveCount(6);
+    for (const link of await actions.locator(".chat-providers a").all()) {
+      const url = new URL((await link.getAttribute("href"))!);
+      expect([...url.searchParams.values()][0]).toContain("# Installation");
+      expect(await link.getAttribute("target")).toBe("_blank");
+      expect(
+        await link.locator("img").evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0),
+      ).toBe(true);
+    }
+    await actions.locator("summary").click();
+    await expect(actions.locator(".chat-providers")).not.toBeVisible();
+    await page.evaluate(() =>
+      Object.defineProperty(navigator.clipboard, "writeText", {
+        configurable: true,
+        value: () => Promise.reject(new Error("Denied")),
+      }),
+    );
+    await actions.getByRole("button", { name: "Copy as Markdown" }).click();
+    await expect(actions.getByRole("textbox", { name: "Page Markdown" })).toHaveValue(/# Installation/);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await actions.getByRole("button", { name: "Scroll to top" }).click();
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  }
+});

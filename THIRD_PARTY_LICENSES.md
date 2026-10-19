@@ -12,6 +12,6 @@ The brand-page structure follows [Smeltery Labs](https://smeltery-labs.vercel.ap
 - Lucide: ISC license, with Feather-derived icons under MIT; see the installed package notices.
 - React and Next.js: MIT license.
 - Marked and Mermaid: MIT license.
-- GitHub, Claude and OpenAI brand marks: used only to identify integrations. Trademarks remain with their respective owners; no endorsement is implied.
+- GitHub, Claude, OpenAI, v0, T3 Chat, Scira and Cursor brand marks: used only to identify integrations. Trademarks remain with their respective owners; no endorsement is implied.
 
 The prr mark and social illustration are original project assets. Dependency licenses remain in their installed packages and distributions.

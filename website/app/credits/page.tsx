@@ -16,8 +16,8 @@ export default function Credits() {
         original prr copy, colors, and assets.
       </p>
       <p>
-        GitHub, Claude, and OpenAI marks identify their respective integrations and remain the property of their owners.
-        Their use does not imply endorsement.
+        GitHub, Claude, OpenAI, v0, T3 Chat, Scira, and Cursor marks identify their respective integrations and remain
+        the property of their owners. Their use does not imply endorsement.
       </p>
       <Link href="https://github.com/smeltery/prr/blob/master/LICENSE">Read the project license</Link>
     </main>
