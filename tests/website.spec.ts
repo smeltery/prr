@@ -125,6 +125,7 @@ test("homepage questions and brand assets work", async ({ page, context, request
   await question.click();
   await expect(page.locator("details[open]")).toHaveCount(0);
   await page.goto("/brand");
+  await expect(page.locator(".social img")).toHaveAttribute("src", "/og.png");
   await page.getByRole("button", { name: "Copy Celadon #b8d9a2" }).click();
   await expect(page.getByRole("status")).toContainText("Celadon #b8d9a2 copied");
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe("#b8d9a2");

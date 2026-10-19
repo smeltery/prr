@@ -62,6 +62,7 @@ export default function BrandPage() {
         <figure className="social">
           <Image
             src="/og.png"
+            unoptimized
             alt="prr: Catch bugs before you merge. A terminal review and a verified finding on charcoal."
             width={1200}
             height={630}
