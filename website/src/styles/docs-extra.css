@@ -26,7 +26,7 @@
 @media(max-width:1100px) { .docs-toc { display: none; } .mobile-toc { display: block; padding: 12px; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 30px; font-size: 12px; } .mobile-toc nav { display: grid; gap: 12px; margin-top: 15px; } }
 @media(max-width:700px) { .docs-sidebar { position: static; height: auto; } .docs-sidebar nav > div { flex-shrink: 0; } .docs-sidebar p { display: none; } .docs-main { padding-inline: 20px; } .docs-main h1 { font-size: 42px; } .doc-content table { font-size: 11px; table-layout: fixed; } .doc-content td { padding: 10px 5px; } }
 
-.mermaid-diagram img { display: block; width: 100%; min-width: 260px; max-width: 650px; height: auto; margin: auto; }
+.mermaid-diagram img { display: block; max-width: none; height: auto; margin: auto; }
 .docs-mobile-navigation { display: none; }
 .docs-panel-heading { display: flex; justify-content: space-between; align-items: center; }
 .docs-panel-heading button { background: transparent; padding: 12px; }

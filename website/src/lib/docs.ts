@@ -42,7 +42,7 @@ export function getDoc(slug: string) {
     const svg = fs.readFileSync(path.join(process.cwd(), "public", "diagrams", `${name}.svg`), "utf8");
     const dimensions = svg.match(/viewBox="[^"]*? ([\d.]+) ([\d.]+)"/);
     if (!dimensions) throw new Error(`Missing viewBox in ${name}.svg`);
-    return `<figure class="mermaid-diagram"><img src="/diagrams/${name}.svg" width="${dimensions[1]}" height="${dimensions[2]}" alt="${entry[0]} workflow diagram" loading="lazy" /></figure>`;
+    return `<figure class="mermaid-diagram" tabindex="0" role="region" aria-label="${entry[0]} workflow diagram ${diagramIndex}"><img src="/diagrams/${name}.svg" width="${dimensions[1]}" height="${dimensions[2]}" alt="${entry[0]} workflow diagram" loading="lazy" /></figure>`;
   };
   renderer.heading = ({ text, depth }) => `<h${depth} id="${headingId(text)}">${text}</h${depth}>`;
   renderer.link = function ({ href, tokens }) {
